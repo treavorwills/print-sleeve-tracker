@@ -1,4 +1,5 @@
 const Opportunity = require('../models/Opportunity');
+const Customer = require('../models/Customer');
 
 module.exports={
     getOpportunities(req,res) {
@@ -28,7 +29,19 @@ module.exports={
     },
     createOpportunity(req, res) {
         Opportunity.create(req.body)
-        .then((opportunity) => res.json(opportunity))
+        .then((opportunity) => {
+            return Customer.findOneAndUpdate(
+                {customerId: req.body.customerId},
+                {$addToSet: { opportunities: opportunity._id }},
+                {new: true}
+            );
+        })
+        .then((customer) => !customer ? res 
+        .status(404)
+        .json({ message: 'opportunity create, but no customer found with that customer ID.'})
+        : res.json('Opportunity created')
+        )
+        // .then((opportunity) => res.json(opportunity))
         .catch((err) => res.status(500).json(err));
     },
     deleteOpportunity(req, res) {

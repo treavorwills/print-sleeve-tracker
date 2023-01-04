@@ -9,6 +9,7 @@ module.exports = {
     getSingleCustomer(req, res) {
         Customer.findOne({ _id: req.params.customerId })
         .select('-_v')
+        .populate('opportunity')
         .then((customer) =>
         !customer ?
         res.status(404).json({message: 'No Customers found with that ID!'}) :

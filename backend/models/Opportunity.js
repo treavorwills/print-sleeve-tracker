@@ -19,8 +19,7 @@ const opportunitySchema = new Schema(
     {
         customerId: {
             type: Number,
-            required: true,
-            unique: true
+            required: true
         },
         materials: [MaterialSchema],
         volumeCommitment: {
@@ -39,7 +38,7 @@ const opportunitySchema = new Schema(
         printNotes: {
             type: String,
             maxlength: 50,
-        }
+        },
      }
 );
 

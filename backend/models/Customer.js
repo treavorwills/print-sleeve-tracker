@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+// const opportunity = require('./Opportunity');
 
 const customerSchema = new Schema(
     {
@@ -29,7 +30,13 @@ const customerSchema = new Schema(
             type: String,
             maxlength: 50,
         },
-     }
+        opportunities: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'opportunity'
+            },
+        ],
+    }
 );
 
 const Customer = model('customer', customerSchema);
