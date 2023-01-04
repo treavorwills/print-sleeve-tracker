@@ -22,25 +22,13 @@ const customerSchema = new Schema(
             type: String,
             maxlength: 50,
         },
-        volumeCommitment: {
-            type: Number,
-        },
         regularBales: {
             type: Boolean
         },
-        url: {
+        ticketUrl: {
             type: String,
             maxlength: 50,
         },
-        status: {
-            type: String,
-            required: true,
-            maxlength: 50,
-        },
-        recommendation: {
-            type: String,
-            maxlength: 50,
-        }
      }
 );
 

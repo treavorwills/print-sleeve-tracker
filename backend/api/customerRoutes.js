@@ -8,10 +8,10 @@ const {
     deleteCustomer,
 } = require('../controller/customerController');
 
-// /api/customer
+// /customer
 router.route('/').get(getCustomers).post(createCustomer);
 
-// api/customer/:customerId
+// /customer/:customerId
 router.route('/:customerId')
 .get(getSingleCustomer)
 .put(updateCustomer)

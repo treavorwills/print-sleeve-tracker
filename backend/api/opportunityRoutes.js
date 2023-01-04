@@ -8,12 +8,13 @@ const {
     deleteOpportunity,
 } = require('../controller/opportunityController');
 
-// /api/opportunity/
-router.route('/opportunity')
+// /opportunity/
+router.route('/')
 .get(getOpportunities)
 .post(createOpportunity)
 
-// /api/opportunity/:opportunityId
+// /opportunity/:opportunityId
+router.route('/:opportunityId')
 .get(getSingleOpportunity)
 .put(updateOpportunity)
 .delete(deleteOpportunity);
