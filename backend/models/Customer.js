@@ -33,12 +33,12 @@ const customerSchema = new Schema(
         opportunities: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'opportunity'
+                ref: 'Opportunity'
             },
         ],
     }
 );
 
-const Customer = model('customer', customerSchema);
+const Customer = model('Customer', customerSchema);
 
 module.exports = Customer;

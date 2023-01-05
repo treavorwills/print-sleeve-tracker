@@ -36,10 +36,9 @@ module.exports={
                 {new: true}
             );
         })
-        .then((customer) => !customer ? res 
-        .status(404)
-        .json({ message: 'opportunity create, but no customer found with that customer ID.'})
-        : res.json('Opportunity created')
+        .then((customer, opportunity) => !customer ? 
+        res.status(404).json({ message: 'opportunity create, but no customer found with that customer ID.'})
+        : res.json({ message: 'Opportunity created', customer})
         )
         // .then((opportunity) => res.json(opportunity))
         .catch((err) => res.status(500).json(err));
@@ -49,8 +48,15 @@ module.exports={
         .then((opportunity) => 
         !opportunity
         ? res.status(404).json({ message: 'No opportunity with that ID!' })
-        : console.log('add code to delete opportunities too'))
-        .then(() => res.json({ message: 'opportunity deleted!'}))
+        : Customer.findOneAndUpdate(
+            { opportunities: req.params.opportunityId},
+            { $pull: { opportunities: req.params.opportunityId }},
+            { new: true }
+        ))
+        .then((customer) => !customer 
+        ? res.status(404).json({
+            message: 'Opportunity deleted but no customer with that ID found!', }) 
+            : res.json({ message: 'Opportunity deleted and pulled from customer!'}))
         .catch((err) => res.status(500).json(err));
     }
 }

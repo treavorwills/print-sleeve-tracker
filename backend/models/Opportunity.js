@@ -17,6 +17,10 @@ const recommendationSchema = new Schema(
 
 const opportunitySchema = new Schema(
     {
+        customer: {
+            type: Schema.Types.ObjectId,
+            ref: 'Customer'
+        },
         customerId: {
             type: Number,
             required: true
@@ -42,6 +46,6 @@ const opportunitySchema = new Schema(
      }
 );
 
-const Opportunity = model('opportunity', opportunitySchema);
+const Opportunity = model('Opportunity', opportunitySchema);
 
 module.exports = Opportunity;

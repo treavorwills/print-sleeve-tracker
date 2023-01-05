@@ -1,15 +1,16 @@
 const Customer = require('../models/Customer.js');
 
+
 module.exports = {
     getCustomers(req,res) {
         Customer.find()
+        .populate({ path: 'opportunities' } )
         .then((customers) => res.json(customers))
         .catch((err) => res.status(500).json(err));
     },
     getSingleCustomer(req, res) {
         Customer.findOne({ _id: req.params.customerId })
         .select('-_v')
-        .populate('opportunity')
         .then((customer) =>
         !customer ?
         res.status(404).json({message: 'No Customers found with that ID!'}) :
