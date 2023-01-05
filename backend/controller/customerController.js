@@ -19,8 +19,11 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
     updateCustomer(req, res) {
-        Customer.findOne({ _id: req.params.customerId })
-        .select('-_v')
+        Customer.findOneAndUpdate(
+            { _id: req.params.customerId },
+            { $set: req.body},
+            { returnDocument: 'after' }
+        )
         .then((customer) =>
         !customer ?
         res.status(404).json({message: 'No Customers found with that ID!'}) :
