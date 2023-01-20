@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const MaterialSchema = new Schema(
+const materialSchema = new Schema(
     {
         boardGrade: String,
         width: Number,
@@ -25,7 +25,7 @@ const opportunitySchema = new Schema(
             type: Number,
             required: true
         },
-        materials: [MaterialSchema],
+        materials: [materialSchema],
         volumeCommitment: {
             type: Number,
         },

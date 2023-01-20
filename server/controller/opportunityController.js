@@ -18,8 +18,11 @@ module.exports={
         .catch((err) => res.status(500).json(err));
     },
     updateOpportunity(req, res) {
-        Opportunity.findOne({ _id: req.params.opportunityId })
-        .select('-_v')
+        Opportunity.findOneAndUpdate(
+            {_id: req.params.opportunityId},
+            { $set: req.body },
+            {returnDocument: 'after'}
+            )
         .then((opportunity) =>
         !opportunity ?
         res.status(404).json({message: 'No opportunities found with that ID!'}) :

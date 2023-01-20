@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Data from '../customer-data.json';
 
 export default function SearchBar() {
-    const [query, setQuery] = useState("")
+    const [query, setQuery] = useState("");
     console.log(Data);
     return (
         <div>
